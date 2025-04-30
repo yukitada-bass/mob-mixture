@@ -1,0 +1,18 @@
+---
+import { getSchedules } from "../lib/microcms"
+
+const {contents} = await getSchedules();
+console.log(contents);
+---
+
+<div id="container">
+	<ul>
+      {
+        contents.map((content: any) => (
+          <li>
+            <a href={content.id}>{content.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+</div>

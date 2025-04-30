@@ -4,11 +4,16 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="stylesheet" href="assets/style.css">
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>MOB - Official Web Site</title>
 	</head>
 	<body>
-		<slot />
+		<header><h1>MOB</h1><nav><ul><li>お知らせ</li><li>スケジュール</li><li>リリース</li><li>マーチ</li></ul></nav></header>
+		<main>
+			<slot />
+		</main>
+		<footer><div><small>&copy;MOB</small></div></footer>
 	</body>
 </html>
 

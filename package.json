@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "mob-mixture",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,6 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.7.10"
+    "astro": "^5.7.10",
+    "microcms-js-sdk": "^3.2.0"
+  },
+  "volta": {
+    "node": "22.14.0"
   }
 }
