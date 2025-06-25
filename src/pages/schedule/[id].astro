@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getSchedules, getScheduleDetail } from "../../lib/microcms";
+
+export async function getStaticPaths() {
+  const { contents } = await getSchedules();
+  return contents.map((item) => ({
+    params: { id: item.id },
+  }));
+}
+
+const { id } = Astro.params;
+const schedule = await getScheduleDetail(id);
+
+// 日付のフォーマット
+const dateObj = new Date(schedule.date);
+const formattedDate = dateObj.toLocaleDateString("ja-JP", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout>
+  <div class="container">
+    <h2>{schedule.title}</h2>
+    <p>日時：{formattedDate}</p>
+    <p>場所：{schedule.place[0]}</p>
+    <p>{schedule.open}/{schedule.start}</p>
+    <p>{schedule.adv}円/{schedule.door}円</p>
+    {schedule.image && (
+      <figure><img src={schedule.image.url} alt={schedule.title} /></figure>
+    )}
+  </div>
+</Layout>

@@ -1,7 +1,9 @@
 ---
 import { getSchedules } from "../lib/microcms";
 
+const { categoryId } = Astro.props;
 const { contents } = await getSchedules();
+const filteredContents = contents.filter((content) => content.category.id === categoryId);
 
 // 日付のフォーマット関数（0x月0x日(曜日)）
 function formatDate(rawDate: string) {
@@ -21,7 +23,7 @@ function getYear(rawDate: string) {
 
 <ul>
   {
-    contents.map((content) => (
+    filteredContents.map((content) => (
       <li>
         <a href={`/schedule/${content.id}`}>
           <span>{formatDate(content.date)}</span>

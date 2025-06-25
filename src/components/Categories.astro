@@ -1,0 +1,10 @@
+---
+import { getCategories } from "../lib/microcms";
+
+const { contents } = await getCategories();
+---
+
+<ul>
+  <li><a href="/schedule/">すべて</a></li>
+  {contents.map((content: any) => <li><a href={`/schedule/category/${content.id}`}>{content.name}</a></li>)}
+</ul>
