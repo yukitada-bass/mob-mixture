@@ -1,0 +1,33 @@
+---
+import Categories from "../../components/Categories.astro";
+import Pagination from "../../components/Pagination.astro";
+import Schedules from "../../components/Schedules.astro";
+import Title from "../../components/Title.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getSchedules } from "../../lib/microcms";
+
+export async function getStaticPaths() {
+  const PAGE_SIZE = 5;
+  const { totalCount } = await getSchedules();
+  const totalPages = Math.ceil(totalCount / PAGE_SIZE);
+  let paths = [];
+  for (let i = 1; i <= totalPages; i++) {
+    paths.push({ params: { page: String(i) } });
+  }
+  return paths;
+}
+
+const { page } = Astro.params;
+
+// ページが1の場合はリダイレクト
+if (page === "1") {
+  return Astro.redirect("/schedule/");
+}
+---
+
+<Layout>
+  <Title>SCHEDULE</Title>
+  <Categories categoryId="all" />
+  <Schedules page={page} />
+  <Pagination currentPage={page} />
+</Layout>

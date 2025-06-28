@@ -1,0 +1,20 @@
+---
+const { fontSize } = Astro.props;
+---
+
+<style>
+  .c-title {
+    font-weight: 700;
+    font-size: 5rem;
+    color: var(--color-black);
+    border-bottom: solid 3px var(--color-black);
+    margin-bottom: 16px;
+    width: fit-content;
+    &.--detail {
+      font-size: 3rem;
+      margin-bottom: 32px;
+    }
+  }
+</style>
+
+<h2 class={`c-title ${fontSize}`}><slot /></h2>

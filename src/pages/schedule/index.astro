@@ -1,11 +1,19 @@
 ---
-import Categories from '../../components/Categories.astro';
-import Schedules from '../../components/Schedules.astro';
-import Layout from '../../layouts/Layout.astro';
+import Title from "../../components/Title.astro";
+import Categories from "../../components/Categories.astro";
+import Schedules from "../../components/Schedules.astro";
+import Pagination from "../../components/Pagination.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getSchedules } from "../../lib/microcms";
+
+const PAGE_SIZE = 5;
+const { totalCount } = await getSchedules();
+const totalPages = Math.ceil(totalCount / PAGE_SIZE);
 ---
 
 <Layout>
-	<h2>スケジュール一覧</h2>
-	<Categories />
-	<Schedules />
+  <Title>SCHEDULE</Title>
+  <Categories categoryId="all" />
+  <Schedules />
+  <Pagination currentPage={1} />
 </Layout>

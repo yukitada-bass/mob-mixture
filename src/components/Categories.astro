@@ -2,9 +2,28 @@
 import { getCategories } from "../lib/microcms";
 
 const { contents } = await getCategories();
+const { categoryId } = Astro.props;
 ---
 
-<ul>
-  <li><a href="/schedule/">すべて</a></li>
-  {contents.map((content: any) => <li><a href={`/schedule/category/${content.id}`}>{content.name}</a></li>)}
+<ul class="flex gap-2 mb-8">
+  <li>
+    {categoryId === "all" ? (
+      <span class="c-category">すべて</span>
+    ) : (
+      <a class="c-category" href="/schedule/">すべて</a>
+    )}
+  </li>
+  {
+    contents.map((content: any) => (
+      <li>
+        {content.id === categoryId ? (
+          <span class="c-category">{content.name /* Active category */}</span>
+        ) : (
+          <a class="c-category" href={`/schedule/category/${content.id}`}>
+            {content.name}
+          </a>
+        )}
+      </li>
+    ))
+  }
 </ul>

@@ -1,7 +1,9 @@
 ---
 import { getSchedules } from "../lib/microcms";
+const { categoryId, page } = Astro.props;
 
-const { contents } = await getSchedules();
+let { contents } = await getSchedules({ limit: 5, orders: "date", offset: page ? (Number(page) - 1) * 5 : 0 });
+categoryId && (contents = contents.filter((content) => content.category.id === categoryId));
 
 // 日付のフォーマット関数（0x月0x日(曜日)）
 function formatDate(rawDate: string) {
@@ -19,15 +21,22 @@ function getYear(rawDate: string) {
 }
 ---
 
-<ul>
+<ul class="mb-6">
   {
     contents.map((content) => (
-      <li>
-        <a href={`/schedule/${content.id}`}>
-          <span>{formatDate(content.date)}</span>
-          <span>{getYear(content.date)}</span>
-          <span>{content.category.name}</span>
-          <span>{content.title}</span>
+      <li key={content.id} class="border-b border-gray-500">
+        <a class="flex gap-8 items-center py-4" href={`/schedule/${content.id}`}>
+          <div class="flex flex-col font-bold">
+            <span class="text-2xl w-36">{formatDate(content.date)}</span>
+            <span>{getYear(content.date)}</span>
+          </div>
+          <div class="flex flex-col items-start gap-2">
+            <span class="c-category">{content.category.name}</span>
+            <div class="flex flex-col font-bold">
+              <span>{content.title}</span>
+              <span>{content.place}</span>
+            </div>
+          </div>
         </a>
       </li>
     ))

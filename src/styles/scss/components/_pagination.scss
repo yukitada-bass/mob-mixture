@@ -1,0 +1,43 @@
+.c-pagination {
+  position: relative;
+  z-index: 1;
+  background-color: #fff;
+  display: inline-block;
+  border: var(--color-primary) 2px solid;
+  border-radius: 8px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-oswald);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0;
+  padding: 4px 12px;
+}
+
+span.c-pagination {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+a.c-pagination {
+  overflow: hidden;
+  transition: color 0.6s ease-in-out;
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: var(--color-primary);
+    z-index: -1;
+    inset: 0;
+    height: 200%;
+    clip-path: polygon(0 0, 100% 50%, 100% 100%, 0% 100%);
+    transform: translate(0, 50%);
+    transition: transform 0.6s ease-in-out;
+  }
+  @media (hover: hover) {
+    &:hover {
+      color: #fff;
+    }
+    &:hover::before {
+      transform: translate(0, -50%);
+    }
+  }
+}

@@ -1,4 +1,5 @@
 ---
+import Title from "../../components/Title.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getSchedules, getScheduleDetail } from "../../lib/microcms";
 
@@ -22,14 +23,36 @@ const formattedDate = dateObj.toLocaleDateString("ja-JP", {
 ---
 
 <Layout>
-  <div class="container">
-    <h2>{schedule.title}</h2>
-    <p>日時：{formattedDate}</p>
-    <p>場所：{schedule.place[0]}</p>
-    <p>{schedule.open}/{schedule.start}</p>
-    <p>{schedule.adv}円/{schedule.door}円</p>
-    {schedule.image && (
-      <figure><img src={schedule.image.url} alt={schedule.title} /></figure>
-    )}
+  <Title fontSize={"--detail"}>{schedule.title}</Title>
+  <div class="flex gap-10">
+    {
+      schedule.image && (
+        <figure class="w-96">
+          <img src={schedule.image.url} alt={schedule.title} />
+        </figure>
+      )
+    }
+    <dl>
+      <div class="flex gap-4 mb-4">
+        <dt>DATE</dt>
+        <dd>{formattedDate}</dd>
+      </div>
+      <div class="flex gap-4 mb-4">
+        <dt>VENUE</dt>
+        <dd>{schedule.venue[0]}</dd>
+      </div>
+      <div class="flex gap-4 mb-4">
+        <dt>OPEN/START</dt>
+        <dd>{schedule.open}/{schedule.start}</dd>
+      </div>
+      <div class="flex gap-4 mb-4">
+        <dt>ACT</dt>
+        <dd class="whitespace-pre-line">{schedule.act}</dd>
+      </div>
+      <div class="flex gap-4 mb-4">
+        <dt>ADV/DOOR</dt>
+        <dd>¥{schedule.adv}/¥{schedule.door}(+1Drink ¥600)</dd>
+      </div>
+    </dl>
   </div>
 </Layout>

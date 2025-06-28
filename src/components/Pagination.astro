@@ -1,0 +1,27 @@
+---
+import { getSchedules } from "../lib/microcms";
+
+const { currentPage } = Astro.props;
+
+console.log(currentPage);
+
+const PAGE_SIZE = 5;
+const { totalCount } = await getSchedules();
+const totalPages = Math.ceil(totalCount / PAGE_SIZE);
+---
+
+<ul class="flex justify-center gap-2">
+  {
+    Array.from({ length: totalPages }, (_, i) => i + 1).map((i) => (
+      <li>
+        {i == currentPage ? (
+          <span class="c-pagination">{i}</span>
+        ) : (
+          <a class="c-pagination" href={`/schedule/${i}`}>
+            {i}
+          </a>
+        )}
+      </li>
+    ))
+  }
+</ul>

@@ -1,8 +1,9 @@
 ---
 import { getCategories } from "../../../lib/microcms";
 import Categories from "../../../components/Categories.astro";
-import FilteredSchedules from "../../../components/FilteredSchedules.astro";
+import Schedules from "../../../components/Schedules.astro";
 import Layout from "../../../layouts/Layout.astro";
+import Title from "../../../components/Title.astro";
 
 export async function getStaticPaths() {
   const { contents } = await getCategories();
@@ -15,7 +16,7 @@ const { id } = Astro.params;
 ---
 
 <Layout>
-  <h2>スケジュール一覧（{id}）</h2>
-  <Categories />
-  <FilteredSchedules categoryId={id} />
+  <Title>スケジュール一覧</Title>
+  <Categories categoryId={id} />
+  <Schedules categoryId={id} />
 </Layout>
