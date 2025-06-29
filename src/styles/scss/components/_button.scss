@@ -34,3 +34,29 @@
     }
   }
 }
+
+.c-reserve-button {
+  cursor: pointer;
+  display: flex;
+  background-color: #e37224;
+  color: #fff;
+  font-family: var(--font-oswald);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  padding: 12px 24px;
+  border-radius: 100vmax;
+  margin: 0 auto;
+  &::before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+
+  }
+  @media (hover: hover) {
+    &:hover {
+      color: #fff;
+    }
+  }
+}
